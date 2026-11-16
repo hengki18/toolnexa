@@ -1,8 +1,21 @@
 "use strict";
 const el=id=>document.getElementById(id), input=el("file"), button=el("generate"), result=el("result"), download=el("download");
-let files=[], generation=0, outputURL=null;
+let files=[], generation=0, outputURL=null, selectionValid=false;
 function clearOutput(){if(outputURL)URL.revokeObjectURL(outputURL);outputURL=null;download.hidden=true;download.style.display="none";download.removeAttribute("href");}
-input.addEventListener("change",()=>{generation++;clearOutput();files=Array.from(input.files);el("files").replaceChildren();el("file-name").textContent=files.length?files.length+" foto dipilih":"Belum ada file dipilih";const valid=files.length>0&&files.length<=10&&files.every(f=>["image/jpeg","image/png","image/webp"].includes(f.type))&&files.reduce((a,f)=>a+f.size,0)<=30*1024*1024;button.disabled=!valid;el("status").textContent=valid?"Foto akan diproses sesuai urutan daftar.":"Pilih 1–10 foto yang valid, maksimal total 30 MB.";for(const f of files.slice(0,10)){const li=document.createElement("li");li.textContent=f.name;el("files").append(li);}result.textContent="Hasil akan muncul di sini.";});
+input.addEventListener("change",()=>{generation++;clearOutput();files=Array.from(input.files);el("files").replaceChildren();el("file-name").textContent=files.length?files.length+" foto dipilih":"Belum ada file dipilih";const valid=files.length>0&&files.length<=10&&files.every(f=>["image/jpeg","image/png","image/webp"].includes(f.type))&&files.reduce((a,f)=>a+f.size,0)<=30*1024*1024;selectionValid=valid;button.disabled=!valid;el("status").textContent=valid?"Foto akan diproses sesuai urutan daftar.":"Pilih 1–10 foto yang valid, maksimal total 30 MB.";for(const f of files.slice(0,10)){const li=document.createElement("li");li.textContent=f.name;el("files").append(li);}result.textContent="Hasil akan muncul di sini.";});
+function updatePaper(){
+ const landscape=el("orientation").value==="landscape";
+ const paper=el("paper-preview");
+ paper.style.width=landscape?"119px":"84px";paper.style.height=landscape?"84px":"119px";
+ el("paper-info").textContent=landscape?"A4 Lanskap · 297 × 210 mm":"A4 Potret · 210 × 297 mm";
+}
+function settingsChanged(){
+ generation++;clearOutput();button.disabled=!selectionValid;updatePaper();
+ result.textContent="Pengaturan berubah. Klik Buat PDF untuk menghasilkan dokumen baru.";
+}
+el("orientation").addEventListener("change",settingsChanged);
+el("margin").addEventListener("input",settingsChanged);
+updatePaper();
 const encoder=new TextEncoder();
 function makePDF(images,pw,ph,margin){
  const chunks=[], offsets=[0];let length=0;
@@ -26,6 +39,6 @@ async function readPhoto(file){
  }finally{URL.revokeObjectURL(url);canvas.width=0;canvas.height=0;}
 }
 el("pdf-form").addEventListener("submit",async e=>{e.preventDefault();if(button.disabled||!files.length)return;const margin=el("margin").valueAsNumber;if(!Number.isInteger(margin)||margin<0||margin>40)return;const current=++generation,selected=files.slice(),landscape=el("orientation").value==="landscape";clearOutput();button.disabled=true;
- try{const images=[];for(const file of selected){if(current!==generation)return;result.textContent="Memproses foto "+(images.length+1)+" dari "+selected.length+"...";images.push(await readPhoto(file));}if(current!==generation)return;const pdf=makePDF(images,landscape?841.89:595.28,landscape?595.28:841.89,margin*72/25.4);outputURL=URL.createObjectURL(pdf);download.href=outputURL;download.download="toolnexa-foto.pdf";download.hidden=false;download.style.display="inline-block";result.textContent="PDF berhasil dibuat: "+images.length+" halaman · "+(pdf.size/1024).toFixed(1)+" KB.";
+ try{const images=[];for(const file of selected){if(current!==generation)return;result.textContent="Memproses foto "+(images.length+1)+" dari "+selected.length+"...";images.push(await readPhoto(file));}if(current!==generation)return;const pdf=makePDF(images,landscape?841.89:595.28,landscape?595.28:841.89,margin*72/25.4);outputURL=URL.createObjectURL(pdf);download.href=outputURL;download.download=landscape?"toolnexa-foto-lanskap.pdf":"toolnexa-foto-potret.pdf";download.hidden=false;download.style.display="inline-block";result.textContent="PDF berhasil dibuat: "+images.length+" halaman · A4 "+(landscape?"Lanskap (297 × 210 mm)":"Potret (210 × 297 mm)")+" · "+(pdf.size/1024).toFixed(1)+" KB.";
  }catch(err){if(current===generation)result.textContent="Gagal membuat PDF. Periksa format dan resolusi foto, lalu coba lagi.";}finally{if(current===generation)button.disabled=false;}
 });
