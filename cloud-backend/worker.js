@@ -7,8 +7,10 @@ export default {async fetch(request,env){
  if(request.headers.get("Origin")!==ORIGIN)return json({error:"Origin tidak diizinkan."},403);
  if(request.method==="OPTIONS")return new Response(null,{status:204,headers:cors});
  if(request.method!=="POST")return json({error:"Metode tidak didukung."},405);
- if(!env.GEMINI_API_KEY||!env.ACCESS_CODE||env.ACCESS_CODE.length<24)return json({error:"Backend belum dikonfigurasi."},503);
- if(request.headers.get("Authorization")!=="Bearer "+env.ACCESS_CODE)return json({error:"Kode akses tidak valid."},401);
+ if(typeof env.GEMINI_API_KEY!=="string"||!env.GEMINI_API_KEY.trim())return json({error:"E01: Secret GEMINI_API_KEY belum terbaca di Production."},503);
+ if(typeof env.ACCESS_CODE!=="string"||!env.ACCESS_CODE.trim())return json({error:"E02: Secret ACCESS_CODE belum terbaca di Production."},503);
+ if(!/^[A-Za-z0-9]{24,}$/.test(env.ACCESS_CODE))return json({error:"E03: ACCESS_CODE harus berisi minimal 24 huruf atau angka tanpa spasi."},503);
+ if(request.headers.get("Authorization")!=="Bearer "+env.ACCESS_CODE)return json({error:"E04: Kode akses tidak cocok dengan Secret ACCESS_CODE."},401);
  if(env.METADATA_LIMITER){const limit=await env.METADATA_LIMITER.limit({key:"metadata"});if(!limit.success)return json({error:"Terlalu banyak permintaan. Coba lagi nanti."},429);}
  let body;try{body=await readBody(request);}catch{return json({error:"Data terlalu besar atau tidak valid."},400);}
  if(!body||!Array.isArray(body.images)||body.images.length<1||body.images.length>3||!["photo","video"].includes(body.kind)||body.images.some(x=>typeof x!=="string"||x.length>380000||!/^data:image\/jpeg;base64,[A-Za-z0-9+/]+=*$/.test(x)))return json({error:"Bingkai JPEG tidak valid."},400);
