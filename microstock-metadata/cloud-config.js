@@ -1,2 +1,2 @@
-// Isi dengan URL HTTPS Worker milik ToolNexa setelah backend aktif. Jangan pernah menaruh API key atau kode akses di sini.
-window.TOOLNEXA_CLOUD_ENDPOINT = "";
+// Public backend URL only. Secrets remain in Cloudflare.
+window.TOOLNEXA_CLOUD_ENDPOINT = "https://toolnexa-metadata.hengkitornado-18.workers.dev";
