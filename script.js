@@ -9,10 +9,10 @@ function calculate(event) {
   const newWidth = document.getElementById("new-width").valueAsNumber;
   const values = [width, height, newWidth];
   if (!values.every(n => Number.isInteger(n) && n >= 1 && n <= 100000)) {
-    result.textContent = "Please enter whole numbers between 1 and 100,000.";
+    result.textContent = "Masukkan bilangan bulat antara 1 dan 100.000.";
     return;
   }
   const newHeight = Math.max(1, Math.round(newWidth * height / width));
-  result.textContent = "New dimensions: " + newWidth + " × " + newHeight + " px";
+  result.textContent = "Ukuran baru: " + newWidth + " × " + newHeight + " px";
 }
 form.addEventListener("submit", calculate);
