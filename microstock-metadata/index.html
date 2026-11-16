@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pembuat Metadata Microstock Gratis – Judul, Deskripsi dan Keyword | ToolNexa</title>
+<meta name="description" content="Susun judul, deskripsi dan keyword bahasa Inggris untuk foto, ilustrasi dan video microstock. Hapus keyword duplikat, atur urutan dan salin hasil gratis.">
+<link rel="canonical" href="https://hengki18.github.io/toolnexa/microstock-metadata/"><link rel="stylesheet" href="../style-v2.css"><link rel="stylesheet" href="metadata.css"><script src="metadata.js" defer></script></head>
+<body><header class="site-header"><a class="brand" href="../">Tool<span>Nexa</span></a><nav aria-label="Navigasi utama"><a href="../#tools">Alat</a><a href="../#about">Tentang</a></nav></header>
+<main><section class="hero"><p class="eyebrow">ALAT MICROSTOCK GRATIS</p><h1>Pembuat Metadata Microstock</h1><p>Susun judul, deskripsi dan keyword untuk aset foto, ilustrasi dan video.</p></section>
+<section class="panel"><h2>Informasi aset</h2><p>Isi keterangan dalam bahasa Inggris untuk menghasilkan draf metadata bahasa Inggris. Alat ini memakai pola teks sederhana, bukan AI penerjemah atau pengenal gambar.</p>
+<form id="metadata-form">
+<label>Jenis aset<select id="kind"><option value="photo">Foto</option><option value="illustration">Ilustrasi</option><option value="video">Video</option><option value="animation">Animasi</option></select></label>
+<label>Objek utama (bahasa Inggris)<input id="subject" placeholder="Contoh: digital security shield" maxlength="100" required></label>
+<label>Aksi atau detail tambahan (opsional)<input id="detail" placeholder="Contoh: glowing lock icon" maxlength="100"></label>
+<label>Latar atau lokasi (opsional)<input id="setting" placeholder="Contoh: dark blue background" maxlength="100"></label>
+<label>Gaya visual (opsional)<select id="style"><option value="">Tidak ditentukan</option><option value="3D render">Render 3D</option><option value="flat design">Desain datar</option><option value="minimalist">Minimalis</option><option value="realistic">Realistis</option><option value="abstract">Abstrak</option></select></label>
+<label>Keyword utama (pisahkan dengan koma atau baris baru)<textarea id="keywords" rows="4" maxlength="3000" placeholder="cybersecurity, data protection, privacy, network security"></textarea></label>
+<label>Keyword tambahan (opsional)<textarea id="extra" rows="3" maxlength="3000" placeholder="technology, digital, protection"></textarea></label>
+<label>Jumlah keyword maksimal<input id="limit" type="number" min="1" max="49" step="1" value="49" required></label>
+<label class="metadata-check"><input id="ai" type="checkbox"> Aset dibuat dengan AI generatif (pengingat pengungkapan, bukan keyword otomatis)</label>
+<div class="metadata-actions"><button type="submit">Buat draf metadata</button><button type="button" id="example" class="secondary-button">Isi contoh</button><button type="reset" class="secondary-button">Kosongkan</button></div></form>
+<p id="feedback" role="status" aria-live="polite"></p></section>
+<section class="panel metadata-results" id="results" hidden><h2>Hasil metadata</h2><p>Periksa kembali apakah setiap kata benar-benar menggambarkan asetmu. Hasil bisa diedit sebelum disalin.</p>
+<label>Judul <span id="title-count"></span><textarea id="title" rows="2"></textarea></label><button type="button" data-copy="title">Salin judul</button>
+<label>Deskripsi<textarea id="description" rows="4"></textarea></label><button type="button" data-copy="description">Salin deskripsi</button>
+<label>Keyword <span id="keyword-count"></span><textarea id="output-keywords" rows="6"></textarea></label><button type="button" data-copy="output-keywords">Salin keyword</button>
+<h3>Urutan keyword</h3><p>Sepuluh keyword pertama ditandai agar mudah diperiksa. Geser urutannya dengan tombol panah atau hapus keyword yang tidak relevan.</p><ol id="keyword-list" class="keyword-list"></ol><button id="normalize" type="button" class="secondary-button">Rapikan keyword dan hapus duplikat</button>
+<p id="reminder"></p><div class="metadata-actions"><button id="copy-all" type="button">Salin semua</button><button id="download" type="button">Unduh TXT</button></div><p id="copy-status" role="status" aria-live="polite"></p></section>
+<section class="about"><h2>Cara menyusun metadata microstock</h2><ol><li>Masukkan objek utama, detail visual dan keyword yang relevan dalam bahasa Inggris.</li><li>Buat draf judul, deskripsi dan keyword.</li><li>Edit dan urutkan keyword berdasarkan relevansi.</li><li>Salin hasil ke formulir platform microstock atau unduh sebagai TXT.</li></ol>
+<h2>Apakah alat ini menghasilkan keyword yang sedang tren?</h2><p>Tidak. Alat ini merapikan dan menggabungkan informasi yang kamu masukkan, tanpa data volume pencarian atau analisis gambar. Jangan menambahkan kata yang tidak terlihat atau tidak relevan dengan aset. Batas 49 keyword adalah pengaturan alat, bukan aturan universal seluruh platform.</p>
+<h2>Privasi dan penggunaan AI generatif</h2><p>Semua informasi diproses di browser tanpa dikirim ke server ToolNexa. Jika aset dibuat dengan AI generatif, periksa persyaratan platform dan gunakan pengaturan pengungkapan AI yang sesuai. Alat ini tidak mengirim metadata atau mengunggah aset ke platform microstock.</p><p>Untuk menyiapkan video, gunakan juga <a href="../video-bitrate-calculator/">kalkulator bitrate video</a>.</p></section></main>
+<footer>ToolNexa · Alat online gratis untuk semua.</footer></body></html>
