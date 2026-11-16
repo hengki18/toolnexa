@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ToolNexa – Free Online Aspect Ratio Calculator</title>
+  <meta name="description" content="Calculate image and video dimensions while preserving their aspect ratio. Free, simple, and no registration required.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="./">Tool<span>Nexa</span></a><nav aria-label="Main navigation"><a href="#calculator">Tools</a><a href="#about">About</a></nav></header>
+  <main>
+    <section class="hero"><p class="eyebrow">FREE ONLINE TOOLS</p><h1>Simple tools for everyday creators.</h1><p>Fast, free and easy to use. No registration required.</p></section>
+    <section class="panel" id="calculator">
+      <h2>Aspect Ratio Calculator</h2>
+      <p>Enter your original image or video dimensions and a new width to calculate the matching height.</p>
+      <form id="ratio-form">
+        <div class="fields">
+          <label>Original width (px)<input id="width" type="number" min="1" max="100000" step="1" value="1920" required></label>
+          <label>Original height (px)<input id="height" type="number" min="1" max="100000" step="1" value="1080" required></label>
+          <label>New width (px)<input id="new-width" type="number" min="1" max="100000" step="1" value="1280" required></label>
+        </div>
+        <button type="submit">Calculate</button>
+      </form>
+      <output id="result" aria-live="polite">Enter dimensions and select Calculate.</output>
+      <h3>How it works</h3><p>The calculator multiplies the new width by the original height, then divides by the original width. The result is rounded to the nearest pixel.</p>
+      <p>Example: 1920 × 1080 resized to a width of 1280 pixels gives a height of 720 pixels.</p>
+    </section>
+    <section id="about" class="about"><h2>About ToolNexa</h2><p>ToolNexa is a growing collection of browser-based utilities for creators. This calculator runs locally in your browser and does not upload files or send your entered dimensions to a server.</p></section>
+  </main>
+  <footer>ToolNexa · Free online tools for everyone.</footer>
+</body>
+</html>
