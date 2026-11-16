@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalkulator Bitrate Video dan Ukuran File Online | ToolNexa</title><meta name="description" content="Hitung perkiraan ukuran file video dari bitrate dan durasi, atau cari bitrate video untuk target ukuran file. Gratis tanpa login.">
+<link rel="canonical" href="https://hengki18.github.io/toolnexa/video-bitrate-calculator/"><link rel="stylesheet" href="../style-v2.css"><script src="bitrate.js" defer></script></head><body>
+<header class="site-header"><a class="brand" href="../">Tool<span>Nexa</span></a><nav aria-label="Navigasi utama"><a href="../#tools">Alat</a><a href="../#about">Tentang</a></nav></header>
+<main><section class="hero"><p class="eyebrow">ALAT VIDEO GRATIS</p><h1>Kalkulator Bitrate Video</h1><p>Perkirakan ukuran file video atau hitung bitrate berdasarkan target ukuran file.</p></section>
+<section class="panel"><h2>Hitung bitrate dan ukuran video</h2>
+<form id="bitrate-form">
+<label>Jenis perhitungan<select id="mode" style="width:100%;padding:.75rem;border:1px solid #aebdd1;border-radius:8px;font:inherit"><option value="size">Hitung ukuran file video</option><option value="bitrate">Hitung bitrate untuk target ukuran file</option></select></label>
+<div class="fields">
+<label>Resolusi video<select id="resolution" style="width:100%;padding:.75rem;border:1px solid #aebdd1;border-radius:8px;font:inherit"><option value="720">HD 720p</option><option value="1080" selected>Full HD 1080p</option><option value="1440">QHD 1440p</option><option value="2160">4K 2160p</option></select></label>
+<label>Kecepatan bingkai (FPS)<select id="fps" style="width:100%;padding:.75rem;border:1px solid #aebdd1;border-radius:8px;font:inherit"><option>24</option><option selected>30</option><option>60</option></select></label>
+<label>Durasi video (detik)<input id="duration" type="number" min="1" max="86400" step="1" value="60" required></label>
+<label>Bitrate audio (kbps)<input id="audio" type="number" min="0" max="1536" step="1" value="128" required></label>
+<label id="video-label">Bitrate video (Mbps)<input id="video" type="number" min="0.001" max="10000" step="any" value="8" required></label>
+<label id="size-label" style="display:none">Target ukuran file (MB)<input id="size" type="number" min="0.001" max="1000000" step="any" value="100" disabled required></label>
+</div>
+<button id="preset" type="button" style="background:#405675">Gunakan contoh bitrate</button> <button type="submit">Hitung</button>
+<p id="hint" aria-live="polite">Contoh bitrate H.264: 8 Mbps untuk Full HD 30 FPS. Ini hanya titik awal, bukan standar wajib.</p>
+</form><output id="result" aria-live="polite">Masukkan pengaturan video lalu klik Hitung.</output>
+<p>Perhitungan memakai MB desimal (1 MB = 1.000.000 byte). Ukuran aktual dapat berbeda akibat bitrate variabel, metadata, dan overhead kontainer.</p>
+</section><section class="about"><h2>Apa itu bitrate video?</h2><p>Bitrate menunjukkan jumlah data video yang diproses setiap detik. Semakin tinggi bitrate, biasanya semakin besar ukuran file, tetapi kualitas juga dipengaruhi codec, resolusi, FPS, dan isi video.</p><h2>Cara menghitung ukuran file video</h2><p>Ukuran file (MB) ≈ (bitrate video dalam Mbps + bitrate audio dalam Mbps) × durasi dalam detik ÷ 8.</p><p>Contoh: video 60 detik, bitrate video 8 Mbps dan audio 128 kbps menghasilkan perkiraan 60,96 MB.</p><h2>Cara menghitung bitrate sesuai ukuran file</h2><p>Pilih jenis perhitungan target ukuran file, masukkan durasi, ukuran yang diinginkan, dan bitrate audio. Hasilnya adalah perkiraan bitrate rata-rata video, bukan jaminan batas file ekspor. Sisakan ruang untuk overhead saat ukuran maksimum benar-benar ketat.</p><p>Ingin menghitung dimensi video? Coba <a href="../aspect-ratio-calculator/">kalkulator rasio aspek</a>.</p></section></main>
+<footer>ToolNexa · Alat online gratis untuk semua.</footer></body></html>
